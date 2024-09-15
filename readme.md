@@ -60,9 +60,10 @@ License:
 
 (Specify a license for your project, such as MIT or Apache 2.0)
 
-Author(s):
+Terry Bennett
+Rashida Oxley :
 
-(Your name(s) or organization)
+(Bravo Team)
 
 This README file provides a clear overview of the project's purpose, dependencies, usage instructions, output format, notes, and suggestions for future enhancements. It also includes information about contributors and licensing.
 
