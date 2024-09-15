@@ -63,9 +63,10 @@ License:
 
 (Specify a license for your project, such as MIT or Apache 2.0)
 
-Author(s):
+Terry Bennett
+Rashida Oxley:
 
-(Your name(s) or organization)
+BRAVO TEAM
 
 Note:
 
