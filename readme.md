@@ -1,4 +1,4 @@
-![OIP](OIP.jpeg)
+![webscraper](webscraper.jpeg)
 
 Project Title: Job Listing Parser with Export (Remote Python Jobs)
 
