@@ -51,25 +51,29 @@ json: Built-in Python library for working with JSON data.
 Feel free to:
 
 Add more job details if available on the website (e.g., company name, salary range, etc.).
+
 Implement error handling to gracefully handle network issues or unexpected HTML structures.
+
 Refine the keyword-based logic for identifying experience level and job type.
+
 Expand the script to work with multiple job listing websites.
+
 Explore advanced parsing techniques using regular expressions or other libraries.
+
+
+
 Contributing:
 
 We encourage pull requests and issues to improve this script and make it more versatile.
 
-License:
-
-(Specify a license for your project, such as MIT or Apache 2.0)
 
 Terry Bennett
 Rashida Oxley :
 
 (Bravo Team)
 
-This README file provides a clear overview of the project's purpose, dependencies, usage instructions, output format, notes, and suggestions for future enhancements. It also includes information about contributors and licensing.
-
+This README file provides a clear overview of the project's purpose, dependencies, usage instructions, output format, notes, and suggestions for future enhancements.
+It also includes information about contributors.
 
 
 
