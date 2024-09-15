@@ -33,8 +33,11 @@ Output:
 The script will export the parsed job listings to three files in the specified save_path:
 
 cybersecurity_jobs.csv: CSV file containing the job data.
+
 cybersecurity_jobs.xlsx: Excel file containing the job data.
+
 cybersecurity_jobs.json: JSON file containing the job data in a structured format.
+
 Note:
 
 This script currently targets "Remote Python Jobs". You can easily modify it to work with other websites by adjusting the URL and parsing logic based on their HTML structure.
