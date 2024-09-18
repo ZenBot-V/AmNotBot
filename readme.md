@@ -1,75 +1,146 @@
 ![webscraper](webscraper.jpeg)
 
-Project Title: Remote Python Job Scraper
+RemotePyScraper
+RemotePyScraper is a Python-based web scraper for collecting job listings, particularly for remote jobs and entry-level positions in cybersecurity or any other field, by fetching data from both an API and HTML pages. The scraper exports the collected data into CSV, Excel, and JSON formats.
 
-Description:
+Features
+Fetches job listings from a REST API using the httpx library.
+Scrapes job data from Remote Python Jobs using BeautifulSoup and Parsel.
+Filters jobs by experience level (e.g., entry-level).
+Differentiates between remote and on-site positions based on job descriptions.
+Exports job listings to CSV, Excel, and JSON formats.
+Data Collected
+The scraper collects the following information:
 
-This Python script, originally developed as a Jupyter Notebook (remotepyscraper.ipynb), automates the process of scraping job listings from the "Remote Python Jobs" website (https://www.remotepython.com/jobs/). It efficiently extracts key information like job title, URL, experience level (based on keywords), job type (remote/on-site), and a brief description from the job listings. The extracted data is then exported to user-specified locations in CSV, Excel, and JSON formats for easy analysis and further processing.
-
-Functionality:
-
-Fetching Job Listings: The script sends a request to the "Remote Python Jobs" website and retrieves the HTML content of the job listings page.
-Parsing HTML: The HTML content is parsed using CSS selectors to pinpoint relevant portions related to individual job listings.
-Extracting Job Details: It extracts essential information from each job listing, including:
 Job Title
-URL (linking to the full job description)
-Experience Level (determined based on keywords in the job description snippet)
-Job Type (remote or on-site)
-Job Description Snippet
-Data Processing and Export: The extracted data is organized into a list of dictionaries, with each dictionary representing a single job. This structured data is then exported to:
-CSV (Comma-Separated Values) file
-Excel spreadsheet
-JSON (JavaScript Object Notation) file
-Installation:
+Employer/Company
+Location
+Remote/On-site
+Required Experience
+Job Description
+Salary (if available)
+Job Posting URL
+Installation
+Clone the repository:
 
-Clone this repository.
+bash
+Copy code
+git clone https://github.com/your-username/remotepyscraper.git
+cd remotepyscraper
+Install the required dependencies:
 
-Open a terminal or command prompt and navigate to the project directory.
-
-Install the required Python libraries using pip:
-
-Bash
+bash
+Copy code
 pip install httpx parsel pandas
-Use code with caution.
+API Details
+This scraper also integrates with the RapidAPI Jobs Search API. This API fetches job listings from platforms such as Indeed, LinkedIn, Glassdoor, and more. You can customize the API query for location, job type, and more.
 
-Usage:
+API Endpoint:
+https://jobs-search-api.p.rapidapi.com/getjobs
 
-Modify the save_path variable in the script to specify your desired location for the exported files.
+API Query Parameters:
+search_term: The job title or keyword you want to search for (e.g., "cybersecurity", "web developer").
+location: City or region where the job should be located (e.g., "mumbai").
+results_wanted: Number of job listings to fetch (e.g., 5, 10, 50).
+site_name: List of job sites to search on (e.g., ["indeed", "linkedin", "glassdoor"]).
+distance: The distance from the location (in miles) within which jobs should be fetched.
+job_type: Job type (e.g., "fulltime", "parttime").
+is_remote: Boolean to specify whether you want only remote jobs (True) or both remote and on-site (False).
+hours_old: Time frame (in hours) within which the jobs were posted (e.g., 72 for the last three days).
+API Headers:
+x-rapidapi-key: Your unique API key from RapidAPI.
+x-rapidapi-host: The host name of the API (jobs-search-api.p.rapidapi.com).
+Content-Type: Set to application/json.
+Usage
+1. API-Based Job Scraping
+To fetch job listings using the API, customize the following parameters in the payload object within the script:
 
-Run the script:
+python
+Copy code
+payload = {
+    "search_term": "web",
+    "location": "mumbai",
+    "results_wanted": 5,
+    "site_name": ["indeed", "linkedin", "zip_recruiter", "glassdoor"],
+    "distance": 50,
+    "job_type": "fulltime",
+    "is_remote": False,
+    "linkedin_fetch_description": False,
+    "hours_old": 72
+}
+The request will retrieve job listings matching these parameters.
 
-Bash
-python remotepyscraper.py  # Assuming you renamed the notebook to a Python script
-Use code with caution.
+2. Web Scraping (HTML)
+The script also scrapes job listings from Remote Python Jobs using Parsel and BeautifulSoup.
 
-Output:
+python
+Copy code
+response = httpx.get("https://www.remotepython.com/jobs/")
+selector = Selector(text=response.text)
+jobs = []
+It then parses the job title, description, URL, experience level, and job type (remote/on-site) and stores the results.
 
-The script will export three files containing the scraped job data to the specified save_path:
+3. Saving Results
+The data fetched from both the API and the website is exported to CSV, Excel, and JSON formats:
 
-cybersecurity_jobs.csv: CSV file containing job details in a tabular format.
-cybersecurity_jobs.xlsx: Excel spreadsheet with job information.
-cybersecurity_jobs.json: JSON file for structured data processing.
-Customization:
+python
+Copy code
+# Set the save location for CSV, Excel, and JSON
+save_path = r'C:\Users\81sig\Documents'
 
-You can adjust the script to target other job listing websites by modifying the URL and CSS selectors based on their specific HTML structure.
-Refine the keyword-based logic for identifying experience level and job type to enhance accuracy.
-Enhance error handling to gracefully handle network issues or unexpected HTML structures.
-Implement data cleaning and validation techniques for the extracted information.
-Contributing:
+# Export to CSV
+df.to_csv(f'{save_path}\\cyber_jobs.csv', index=False)
 
-We encourage pull requests and issues to improve this script and make it more versatile.
+# Export to Excel
+df.to_excel(f'{save_path}\\cyber_jobs.xlsx', index=False)
 
-License:
+# Export to JSON
+with open(f'{save_path}\\cyber_jobs.json', 'w') as json_file:
+    json.dump(jobs, json_file, indent=4)
+Make sure to update save_path to the appropriate directory on your system.
 
-(Specify a license for your project, such as MIT or Apache 2.0)
+Running the Script
+To run the script, simply execute:
 
-Terry Bennett
-Rashida Oxley:
+bash
+Copy code
+python remotepyscraper.py
+This will collect job data, filter it based on remote/on-site and experience level, and save it to the specified files.
 
-BRAVO TEAM
+Example Output
+The job listings will be exported in the following format:
 
-Note:
+Job Title	URL	Experience	Job Type	Description
+Python Developer	https://www.remotepython.com/job/1/	Entry-level	Remote	Short job description here
+Cybersecurity Intern	https://www.remotepython.com/job/2/	N/A	On-site	No description available
+Configuration
+API Key: Make sure to replace the placeholder "x-rapidapi-key" with your actual RapidAPI key in the headers section:
 
-The original notebook was generated by Colab (https://colab.research.google.com/).
-Consider renaming the script from remotepyscraper.ipynb to a more descriptive Python script file extension (e.g., .py).
-This README provides a clear and concise explanation of the project's purpose, functionality, installation instructions, usage steps, output format, customization options, contribution guidelines, license, authorship, and a note about the script's origin. It maintains proper formatting and grammar for readability on GitHub.
+python
+Copy code
+headers = {
+    "x-rapidapi-key": "YOUR_RAPIDAPI_KEY",
+    "x-rapidapi-host": "jobs-search-api.p.rapidapi.com",
+    "Content-Type": "application/json"
+}
+Save Path: Modify the save_path variable in the script to specify where the CSV, Excel, and JSON files should be saved:
+
+python
+Copy code
+save_path = r'C:\path\to\save\directory'
+Requirements
+Python 3.7+
+Libraries:
+httpx
+parsel
+pandas
+openpyxl (for Excel support)
+To install all the required packages, run:
+
+bash
+Copy code
+pip install -r requirements.txt
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+This README includes detailed information about both API usage and HTML scraping using BeautifulSoup and Parsel. It also provides clear instructions on running the script and configuring the necessary parameters. Let me know if you'd like to add more details or make further adjustments!
