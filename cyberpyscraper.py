@@ -37,7 +37,7 @@ payload = {
 	"hours_old": 72
 }
 headers = {
-	"x-rapidapi-key": "3005d65a7bmsh6992a884ea68973p17c372jsn141c7a7efd7c",
+	"x-rapidapi-key": "API_KEY",
 	"x-rapidapi-host": "jobs-search-api.p.rapidapi.com",
 	"Content-Type": "application/json"
 }
